@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/student_menu_homework"
+            android:title="Homework"
+            android:icon="@drawable/ic_person"/>
+
+    <item
+            android:id="@+id/student_menu_result"
+            android:title="Result"
+            android:icon="@drawable/ic_person"/>
+
+    <item
+            android:id="@+id/student_menu_profile"
+            android:title="Profile"
+            android:icon="@drawable/ic_person"/>
+
+    <item
+            android:id="@+id/student_menu_remark"
+            android:title="Remark"
+            android:icon="@drawable/ic_person"/>
+
+    <item
+            android:id="@+id/student_menu_chat"
+            android:title="Chat"
+            android:icon="@drawable/ic_person"/>
+
+</menu>

@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.vkarmaedu.vkarma"
+        minSdkVersion 18
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    navigationVersion = "1.0.0-alpha09"
+    archLifecycleVersion = "2.1.0-alpha02"
+    roomVersion = "2.1.0-alpha03"
+    coroutines = "1.1.0"
+    daggerVersion = "2.16"
+
+}
+
+dependencies {
+    kapt 'com.google.auto.value:auto-value:1.5.2'
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    implementation 'com.google.android.material:material:1.1.0-alpha03'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    //lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$archLifecycleVersion"
+
+    //room components
+    implementation "androidx.room:room-runtime:2.1.0-alpha04"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-inappmessaging-display:17.0.5'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    implementation 'com.google.firebase:firebase-database:16.0.6'
+
+    // Navigation
+    implementation 'android.arch.navigation:navigation-fragment-ktx:' + navigationVersion
+    implementation 'android.arch.navigation:navigation-ui-ktx:' + navigationVersion
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
+}
+
+configurations {
+    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+}
