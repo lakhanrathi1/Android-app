@@ -24,16 +24,16 @@
             android:label="fragment_student"
             tools:layout="@layout/fragment_student"/>
 
-
-    <include app:graph="@navigation/parent_graph"/>
-    <include app:graph="@navigation/student_graph"/>
-    <include app:graph="@navigation/teacher_graph"/>
-
     <fragment
             android:id="@+id/loginFragment"
             android:name="com.vkarmaedu.vkarma.Fragment.LoginFragment"
             android:label="fragment_login"
-            tools:layout="@layout/fragment_login"/>
+            tools:layout="@layout/fragment_login">
+        <action
+                android:id="@+id/action_loginFragment_to_studentFragment"
+                app:destination="@id/studentFragment"/>
+    </fragment>
+
     <action
             android:id="@+id/action_global_loginFragment"
             app:destination="@id/loginFragment"/>
