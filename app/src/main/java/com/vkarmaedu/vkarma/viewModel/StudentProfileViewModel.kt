@@ -1,4 +1,4 @@
-package com.vkarmaedu.vkarma.ViewModel
+package com.vkarmaedu.vkarma.viewModel
 
 import androidx.lifecycle.ViewModel;
 

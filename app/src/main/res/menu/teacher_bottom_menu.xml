@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
             android:id="@+id/homework"
             android:title="Homework"
             android:icon="@drawable/ic_person"/>
 
     <item
-            android:id="@+id/result"
-            android:title="Result"
+            android:id="@+id/attendance"
+            android:title="Attendance"
             android:icon="@drawable/ic_person"/>
 
     <item
@@ -19,13 +16,12 @@
             android:icon="@drawable/ic_person"/>
 
     <item
-            android:id="@+id/remark"
-            android:title="Remark"
+            android:id="@+id/my_students"
+            android:title="My Students"
             android:icon="@drawable/ic_person"/>
 
     <item
             android:id="@+id/chat"
             android:title="Chat"
             android:icon="@drawable/ic_person"/>
-
 </menu>

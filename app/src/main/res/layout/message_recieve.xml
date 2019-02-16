@@ -23,7 +23,7 @@
 
     <TextView
             android:id="@+id/message_text"
-            android:text="Hi, what's up. How was the day"
+            android:text="Hi, what's up. How was the day ssda"
             android:maxWidth="250dp"
             android:textColor="@android:color/black"
             android:layout_width="wrap_content"

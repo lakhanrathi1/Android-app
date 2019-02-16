@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".Fragment.TeacherFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.TeacherFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <fragment
+            android:id="@+id/nav_host_teacher"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:navGraph="@navigation/teacher_graph"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"/>
 
-</FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/teacher_bottom_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/bottomNavigationView"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

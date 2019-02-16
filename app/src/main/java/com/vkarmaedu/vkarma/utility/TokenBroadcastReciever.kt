@@ -1,4 +1,4 @@
-package com.vkarmaedu.vkarma.Utility
+package com.vkarmaedu.vkarma.utility
 
 import android.content.BroadcastReceiver
 import android.content.Context

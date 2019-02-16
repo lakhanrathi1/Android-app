@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/student_graph"
+        app:startDestination="@id/studentProfileFragment">
+
+
+    <fragment
+            android:id="@+id/studentProfileFragment"
+            android:name="com.vkarmaedu.vkarma.fragment.StudentProfileFragment"
+            android:label="fragment_student_profile"
+            tools:layout="@layout/fragment_student_profile"/>
+    <fragment
+            android:id="@+id/homeworkFragment"
+            android:name="com.vkarmaedu.vkarma.fragment.HomeworkFragment"
+            android:label="fragment_homework"
+            tools:layout="@layout/fragment_homework"/>
+    <fragment
+            android:id="@+id/remarksFragment"
+            android:name="com.vkarmaedu.vkarma.fragment.RemarksFragment"
+            android:label="fragment_remarks"
+            tools:layout="@layout/fragment_remarks"/>
+    <fragment
+            android:id="@+id/resultsFragment"
+            android:name="com.vkarmaedu.vkarma.fragment.ResultsFragment"
+            android:label="fragment_results"
+            tools:layout="@layout/fragment_results"/>
+    <fragment
+            android:id="@+id/chatFragment"
+            android:name="com.vkarmaedu.vkarma.fragment.ChatFragment"
+            android:label="ChatFragment"/>
+</navigation>

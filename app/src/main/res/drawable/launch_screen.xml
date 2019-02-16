@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:shape="rectangle">
-    <solid android:color="@color/blue"/>
-</shape>
+<layer-list
+        android:opacity="opaque"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <color android:color="@color/blue"/>
+    </item>
+
+    <item
+            android:drawable="@drawable/ic_notification"
+            android:gravity="center" >
+    </item>
+
+</layer-list>

@@ -1,4 +1,4 @@
-package com.vkarmaedu.vkarma.Fragment
+package com.vkarmaedu.vkarma.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,21 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.functions.FirebaseFunctions
 import com.vkarmaedu.vkarma.R
-import com.vkarmaedu.vkarma.Utility.TokenBroadcastReceiver
+import com.vkarmaedu.vkarma.utility.TokenBroadcastReceiver
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class LoginFragment : Fragment() {
 
     private val auth : FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private var customToken: String? = null
     private lateinit var tokenReceiver: TokenBroadcastReceiver
+    private val functions : FirebaseFunctions by lazy { FirebaseFunctions.getInstance() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +66,8 @@ class LoginFragment : Fragment() {
                             Log.d(this.javaClass.name, "signInWithCustomToken:success")
                             val user = auth.currentUser
                             updateUI(user)
+                            findNavController().navigate(R.id.action_loginFragment_to_studentFragment)
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(this.javaClass.name, "signInWithCustomToken:failure", task.exception)
@@ -89,9 +91,7 @@ class LoginFragment : Fragment() {
     private fun setCustomToken(token: String) {
         customToken = token
 
-        val status = "Token:$customToken"
         button_signin.isEnabled = true
-        textTokenStatus.text = status
     }
 
 }

@@ -1,4 +1,4 @@
-package com.vkarmaedu.vkarma.Fragment
+package com.vkarmaedu.vkarma.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
