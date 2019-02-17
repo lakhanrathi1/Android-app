@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.adapters.AttendanceListAdapter
 import com.vkarmaedu.vkarma.dataModels.Attendance
-import com.vkarmaedu.vkarma.utility.SwipeController
+import com.vkarmaedu.vkarma.utility.RecyclerViewItemTouchHelper
 import kotlinx.android.synthetic.main.fragment_attendance_list.view.*
 
 class AttendanceListFragment : Fragment() {
@@ -33,7 +33,7 @@ class AttendanceListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        ItemTouchHelper( SwipeController() ).attachToRecyclerView(root.recycler_view)
+        ItemTouchHelper( RecyclerViewItemTouchHelper() ).attachToRecyclerView(root.recycler_view)
 
         return root
     }

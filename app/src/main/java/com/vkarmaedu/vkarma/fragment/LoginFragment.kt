@@ -5,93 +5,88 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.functions.FirebaseFunctionsException
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.utility.TokenBroadcastReceiver
-import kotlinx.android.synthetic.main.fragment_login.*
+import com.vkarmaedu.vkarma.utility.showSnack
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
 
-    private val auth : FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private var customToken: String? = null
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var tokenReceiver: TokenBroadcastReceiver
-    private val functions : FirebaseFunctions by lazy { FirebaseFunctions.getInstance() }
+    private val functions: FirebaseFunctions by lazy { FirebaseFunctions.getInstance() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_login, container, false)
-        tokenReceiver = object : TokenBroadcastReceiver() {
-            override fun onNewToken(token: String?) {
-                Log.d(this.javaClass.name, "onNewToken:$token")
-                setCustomToken(token.toString())
-            }
-        }
+
         root.button_signin.setOnClickListener {
-            startSignIn()
+            val user = root.username.editableText.toString()
+            val pass = root.password.editableText.toString()
+            if (user.isEmpty() || pass.isEmpty() ){
+                showSnack(root, "fields empty")
+            }
+            else getAuthToken(user, pass)
         }
         return root
     }
 
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
+    private fun getAuthToken(username : String, password : String) {
+        val data = hashMapOf(
+            "username" to username,
+            "password" to password
+        )
 
-    override fun onResume() {
-        super.onResume()
-        activity?.registerReceiver(tokenReceiver, TokenBroadcastReceiver.filter)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        activity?.unregisterReceiver(tokenReceiver)
-    }
-
-    private fun startSignIn() {
-        customToken?.let {
-            activity?.let { it1 ->
-                auth.signInWithCustomToken(it)
-                    .addOnCompleteListener(it1) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(this.javaClass.name, "signInWithCustomToken:success")
-                            val user = auth.currentUser
-                            updateUI(user)
-                            findNavController().navigate(R.id.action_loginFragment_to_studentFragment)
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(this.javaClass.name, "signInWithCustomToken:failure", task.exception)
-                            Toast.makeText(context, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
-                            updateUI(null)
-                        }
-                    }
+        functions
+            .getHttpsCallable("generateSignInToken")
+            .call(data)
+            .continueWith {
+                it.result?.data as String
             }
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    Log.d(TAG, it.result.toString())
+                    startSignIn(it.result as String)
+                }
+                else{
+                    val e = it.exception
+                    if (e is FirebaseFunctionsException) {
+                        val code = e.code
+                        val details = e.details
+                        Log.d(TAG, "code : $code \n details : $details")
+                        showSnack(this.requireView(), e.toString())
+                        return@addOnCompleteListener
+                    }
+                    showSnack(this.requireView(), e.toString())
+                    Log.d(TAG, e.toString())
+                }
+            }
+    }
+
+    private fun startSignIn(customToken : String) {
+        activity?.let {
+            auth.signInWithCustomToken(customToken)
+                .addOnCompleteListener(it) { task ->
+                    if (task.isSuccessful) {
+                        if (task.result?.additionalUserInfo?.isNewUser == true){
+                            //update user info
+                        }
+                        findNavController().navigate(R.id.action_loginFragment_to_studentFragment)
+                    } else {
+                        view?.let { it1 -> showSnack(it1, "Sign in failed") }
+                    }
+                }
         }
     }
 
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            textSignInStatus.text = "User ID: $user.uid"
-        } else {
-            textSignInStatus.text = "Error: sign in failed"
-        }
+    companion object {
+        private const val TAG = "LoginFragment"
     }
-
-    private fun setCustomToken(token: String) {
-        customToken = token
-
-        button_signin.isEnabled = true
-    }
-
 }

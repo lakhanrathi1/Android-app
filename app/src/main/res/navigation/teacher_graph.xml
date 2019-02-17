@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/teacher_graph">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/teacher_graph"
+            app:startDestination="@id/attendance">
 
+    <fragment
+            android:id="@+id/attendance"
+            android:name="com.vkarmaedu.vkarma.fragment.TakeAttendanceFragment"
+            android:label="fragment_take_attendance"
+            tools:layout="@layout/fragment_take_attendance"/>
+    <fragment
+            android:id="@+id/homework"
+            android:name="com.vkarmaedu.vkarma.fragment.HomeworkFragment"
+            android:label="fragment_homework"
+            tools:layout="@layout/fragment_homework"/>
 </navigation>

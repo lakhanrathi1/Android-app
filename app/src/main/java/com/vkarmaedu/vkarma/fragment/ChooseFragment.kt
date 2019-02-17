@@ -21,6 +21,7 @@ class ChooseFragment : Fragment() {
             root.findNavController().navigate(R.id.action_chooseFragment_to_studentFragment)
         }
         root.teacher_button.setOnClickListener {
+            root.findNavController().navigate(R.id.action_chooseFragment_to_teacherFragment)
         }
         root.parent_button.setOnClickListener {
         }

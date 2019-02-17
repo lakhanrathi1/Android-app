@@ -3,13 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
-//apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.vkarmaedu.vkarma"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"

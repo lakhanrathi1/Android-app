@@ -1,8 +1,10 @@
 package com.vkarmaedu.vkarma.fragment
 
-import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,7 +12,9 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.utility.replaceFragment
+import com.vkarmaedu.vkarma.utility.showSnack
 import kotlinx.android.synthetic.main.fragment_student.view.*
+import kotlinx.android.synthetic.main.student_content.*
 import kotlinx.android.synthetic.main.student_content.view.*
 
 class StudentFragment : Fragment() {
@@ -37,18 +41,25 @@ class StudentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_student, container, false)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity?.setActionBar(root.toolbar)
+        root.toolbar.inflateMenu(R.menu.action_menu)
+        root.toolbar.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.notification -> {
+                    showSnack(student_container, "notify")
+                    true
+                }
+                R.id.logoff -> {
+                    auth.signOut()
+                    true
+                }
+                else -> false
+            }
         }
+        activity?.setActionBar(root.toolbar)
         root.student_bottom_nav.setOnNavigationItemSelectedListener(onBottomNavigationItemSelectedListener)
         root.drawer_navigation.setNavigationItemSelectedListener (onDrawerItemSelectedListener)
         activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentProfileFragment()) }
         return root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.action_menu, menu)
     }
 
 
@@ -65,6 +76,7 @@ class StudentFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.notification -> {
+                showSnack(student_container, "notify")
                 true
             }
             R.id.logoff -> {
@@ -78,7 +90,12 @@ class StudentFragment : Fragment() {
     private val onDrawerItemSelectedListener = object : NavigationView.OnNavigationItemSelectedListener{
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             return when(item.itemId){
-                R.id.student_fee_payment -> {
+                R.id.fee_payment -> {
+                    showSnack(this@StudentFragment.requireView(), "fee")
+                    true
+                }
+                R.id.logout -> {
+                    auth.signOut()
                     true
                 }
                 else -> false
