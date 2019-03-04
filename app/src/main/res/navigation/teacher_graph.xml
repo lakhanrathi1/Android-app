@@ -10,9 +10,16 @@
             android:name="com.vkarmaedu.vkarma.fragment.TakeAttendanceFragment"
             android:label="fragment_take_attendance"
             tools:layout="@layout/fragment_take_attendance"/>
+
     <fragment
             android:id="@+id/homework"
-            android:name="com.vkarmaedu.vkarma.fragment.HomeworkFragment"
+            android:name="com.vkarmaedu.vkarma.fragment.TeacherHomeworkFragment"
             android:label="fragment_homework"
-            tools:layout="@layout/fragment_homework"/>
+            tools:layout="@layout/fragment_teacher_homework"/>
+    <fragment
+            android:id="@+id/resultUpload"
+            android:name="com.vkarmaedu.vkarma.fragment.ResultUploadFragment"
+            android:label="fragment_result_upload"
+            tools:layout="@layout/fragment_result_upload"/>
+
 </navigation>

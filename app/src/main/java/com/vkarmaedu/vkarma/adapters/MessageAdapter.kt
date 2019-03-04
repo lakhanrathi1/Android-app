@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.data.Message
+import com.vkarmaedu.vkarma.data.UserRepo
 import kotlinx.android.synthetic.main.message_recieve.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,7 +22,7 @@ class MessageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when(messageList[position].userName){
-            "Dhruv" -> VIEW_TYPE_MESSAGE_SENT
+            UserRepo.name -> VIEW_TYPE_MESSAGE_SENT
             else -> VIEW_TYPE_MESSAGE_RECEIVED
         }
     }

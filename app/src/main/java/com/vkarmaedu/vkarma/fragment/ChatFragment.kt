@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.adapters.MessageAdapter
 import com.vkarmaedu.vkarma.data.Message
+import com.vkarmaedu.vkarma.data.UserRepo
 import com.vkarmaedu.vkarma.viewModel.ChatViewModel
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import java.util.*
@@ -56,13 +58,13 @@ class ChatFragment : Fragment() {
         })
 
         root.chat_send.setOnClickListener {
-            viewModel.insertFirebase(Message("Dhruv", root.chat_message.text.toString(), Date(System.currentTimeMillis()), null))
+            viewModel.insertFirebase(Message(UserRepo.name!!, root.chat_message.text.toString(), Date(System.currentTimeMillis()), null))
         }
         root.attach.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "*/*"
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-            activity?.startActivityForResult(intent, PICK_IMAGE)
+            startActivityForResult(intent, PICK_IMAGE)
         }
         return root
     }
@@ -71,8 +73,10 @@ class ChatFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null){
             data.data?.let {
+                Log.d(TAG, it.toString())
                 viewModel.insertStorage(it)
             }
+            Log.d(TAG, "onactivityresult")
         }
     }
 

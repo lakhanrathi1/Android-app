@@ -13,10 +13,12 @@ import com.google.firebase.storage.FirebaseStorage
 import com.vkarmaedu.vkarma.data.Message
 import com.vkarmaedu.vkarma.data.MessageDatabase
 import com.vkarmaedu.vkarma.data.MessageRepository
+import com.vkarmaedu.vkarma.data.UserRepo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
@@ -79,8 +81,9 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
             fileReference.downloadUrl
         }.addOnCompleteListener {
             if (it.isSuccessful){
-                val downloadUri = it.result
-
+                val downloadUri = it.result.toString()
+                insertFirebase(Message(UserRepo.name!!, "", Date(System.currentTimeMillis()), downloadUri))
+                Log.d(TAG, "success : $downloadUri")
             }
             else{
                 Log.d(TAG , "upload failed : ${it.exception}")

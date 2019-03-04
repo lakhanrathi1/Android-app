@@ -4,27 +4,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/homework"
+            android:id="@+id/homeworkFragment"
             android:title="Homework"
             android:icon="@drawable/ic_person"/>
 
     <item
-            android:id="@+id/result"
+            android:id="@+id/resultsFragment"
             android:title="Result"
             android:icon="@drawable/ic_person"/>
 
     <item
-            android:id="@+id/profile"
+            android:id="@+id/studentProfileFragment"
             android:title="Profile"
             android:icon="@drawable/ic_person"/>
 
     <item
-            android:id="@+id/remark"
+            android:id="@+id/remarksFragment"
             android:title="Remark"
             android:icon="@drawable/ic_person"/>
 
     <item
-            android:id="@+id/chat"
+            android:id="@+id/chatFragment"
             android:title="Chat"
             android:icon="@drawable/ic_person"/>
 

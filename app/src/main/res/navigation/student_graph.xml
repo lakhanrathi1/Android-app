@@ -14,9 +14,9 @@
             tools:layout="@layout/fragment_student_profile"/>
     <fragment
             android:id="@+id/homeworkFragment"
-            android:name="com.vkarmaedu.vkarma.fragment.HomeworkFragment"
+            android:name="com.vkarmaedu.vkarma.fragment.StudentHomeworkFragment"
             android:label="fragment_homework"
-            tools:layout="@layout/fragment_homework"/>
+            tools:layout="@layout/fragment_student_homework"/>
     <fragment
             android:id="@+id/remarksFragment"
             android:name="com.vkarmaedu.vkarma.fragment.RemarksFragment"

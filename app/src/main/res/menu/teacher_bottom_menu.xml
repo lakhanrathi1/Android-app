@@ -16,8 +16,8 @@
             android:icon="@drawable/ic_person"/>
 
     <item
-            android:id="@+id/my_students"
-            android:title="My Students"
+            android:id="@+id/resultUpload"
+            android:title="result"
             android:icon="@drawable/ic_person"/>
 
     <item

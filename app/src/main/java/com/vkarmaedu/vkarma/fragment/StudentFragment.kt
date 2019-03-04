@@ -6,12 +6,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.vkarmaedu.vkarma.R
-import com.vkarmaedu.vkarma.utility.replaceFragment
+import com.vkarmaedu.vkarma.data.UserRepo
 import com.vkarmaedu.vkarma.utility.showSnack
 import kotlinx.android.synthetic.main.fragment_student.view.*
 import kotlinx.android.synthetic.main.student_content.*
@@ -31,7 +33,7 @@ class StudentFragment : Fragment() {
                 findNavController().navigate(R.id.action_global_loginFragment)
             }
             else{
-
+                currentUser.displayName?.let { it1 -> UserRepo.setCred(it1, currentUser.uid) }
             }
         }
     }
@@ -45,7 +47,7 @@ class StudentFragment : Fragment() {
         root.toolbar.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.notification -> {
-                    showSnack(student_container, "notify")
+                    showSnack(nav_host_student.requireView(), "notify")
                     true
                 }
                 R.id.logoff -> {
@@ -56,9 +58,10 @@ class StudentFragment : Fragment() {
             }
         }
         activity?.setActionBar(root.toolbar)
-        root.student_bottom_nav.setOnNavigationItemSelectedListener(onBottomNavigationItemSelectedListener)
+        val navController = Navigation.findNavController(root.findViewById(R.id.nav_host_student))
+        root.findViewById<BottomNavigationView>(R.id.student_bottom_nav)
+            .setupWithNavController(navController)
         root.drawer_navigation.setNavigationItemSelectedListener (onDrawerItemSelectedListener)
-        activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentProfileFragment()) }
         return root
     }
 
@@ -76,7 +79,7 @@ class StudentFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.notification -> {
-                showSnack(student_container, "notify")
+                showSnack(nav_host_student.requireView(), "notify")
                 true
             }
             R.id.logoff -> {
@@ -102,34 +105,6 @@ class StudentFragment : Fragment() {
             }
         }
 
-    }
-
-    private val onBottomNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
-        override fun onNavigationItemSelected(item: MenuItem): Boolean {
-            return when (item.itemId) {
-                R.id.profile -> {
-                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentProfileFragment()) }
-                    true
-                }
-                R.id.homework -> {
-                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, HomeworkFragment()) }
-                    true
-                }
-                R.id.remark -> {
-                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, RemarksFragment()) }
-                    true
-                }
-                R.id.chat -> {
-                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, ChatFragment()) }
-                    true
-                }
-                R.id.result -> {
-                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, ResultsFragment()) }
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     companion object {
