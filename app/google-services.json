@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "482985280363",
+    "firebase_url": "https://vkarma-5f051.firebaseio.com",
+    "project_id": "vkarma-5f051",
+    "storage_bucket": "vkarma-5f051.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482985280363:android:61de9aab21e9c7ff",
+        "android_client_info": {
+          "package_name": "com.vkarmaedu.vkarma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482985280363-p62kmr4sqdd102po7cioikdric9ibqqf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vkarmaedu.vkarma",
+            "certificate_hash": "c9fc66eef37fa782edc52f7a39ea3515e4e04769"
+          }
+        },
+        {
+          "client_id": "482985280363-2nonkbssul4n9rg5j3jut5mmgq4j00a3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyoHnPGmyMm9gelw57qyIPZPAand6pBTU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482985280363-2nonkbssul4n9rg5j3jut5mmgq4j00a3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
