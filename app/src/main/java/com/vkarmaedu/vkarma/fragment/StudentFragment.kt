@@ -55,7 +55,7 @@ class StudentFragment : Fragment() {
         root.notification.setOnClickListener {
             activity?.let { it1 -> replaceFragmentAddToBackStack(it1, NotificationFragment()) }
         }
-
+        activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentHomeworkFragment()) }
         return root
     }
 
