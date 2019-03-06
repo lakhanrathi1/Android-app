@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.data.UserRepo
+import com.vkarmaedu.vkarma.utility.replaceFragment
+import com.vkarmaedu.vkarma.utility.replaceFragmentAddToBackStack
 import com.vkarmaedu.vkarma.utility.showSnack
 import kotlinx.android.synthetic.main.fragment_student.view.*
-import kotlinx.android.synthetic.main.student_content.*
 import kotlinx.android.synthetic.main.student_content.view.*
 
 class StudentFragment : Fragment() {
@@ -30,7 +29,7 @@ class StudentFragment : Fragment() {
         authStateListener = FirebaseAuth.AuthStateListener {
             val currentUser = it.currentUser
             if (currentUser == null){
-                findNavController().navigate(R.id.action_global_loginFragment)
+                activity?.let { it1 -> replaceFragmentAddToBackStack(it1, LoginFragment()) }
             }
             else{
                 currentUser.displayName?.let { it1 -> UserRepo.setCred(it1, currentUser.uid) }
@@ -43,25 +42,20 @@ class StudentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_student, container, false)
-        root.toolbar.inflateMenu(R.menu.action_menu)
-        root.toolbar.setOnMenuItemClickListener {
-            when(it.itemId){
-                R.id.notification -> {
-                    showSnack(nav_host_student.requireView(), "notify")
-                    true
-                }
-                R.id.logoff -> {
-                    auth.signOut()
-                    true
-                }
-                else -> false
-            }
-        }
-        activity?.setActionBar(root.toolbar)
-        val navController = Navigation.findNavController(root.findViewById(R.id.nav_host_student))
-        root.findViewById<BottomNavigationView>(R.id.student_bottom_nav)
-            .setupWithNavController(navController)
+
+        val toggle = ActionBarDrawerToggle(
+            activity, root.drawer_layout, root.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        root.drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
         root.drawer_navigation.setNavigationItemSelectedListener (onDrawerItemSelectedListener)
+        root.student_bottom_nav.setOnNavigationItemSelectedListener (onBottomNavigationItemSelectedListener)
+
+        root.notification.setOnClickListener {
+            activity?.let { it1 -> replaceFragmentAddToBackStack(it1, NotificationFragment()) }
+        }
+
         return root
     }
 
@@ -79,11 +73,8 @@ class StudentFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.notification -> {
-                showSnack(nav_host_student.requireView(), "notify")
-                true
-            }
-            R.id.logoff -> {
-                auth.signOut()
+                this.view?.let { showSnack(it, "notify") }
+                activity?.let { replaceFragmentAddToBackStack(it, NotificationFragment()) }
                 true
             }
             else -> false
@@ -105,6 +96,34 @@ class StudentFragment : Fragment() {
             }
         }
 
+    }
+
+    private val onBottomNavigationItemSelectedListener = object : BottomNavigationView.OnNavigationItemSelectedListener {
+        override fun onNavigationItemSelected(item: MenuItem): Boolean {
+            return when (item.itemId) {
+                R.id.homeworkFragment -> {
+                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentHomeworkFragment()) }
+                    true
+                }
+                R.id.resultsFragment -> {
+                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, ResultsFragment()) }
+                    true
+                }
+                R.id.studentProfileFragment -> {
+                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentProfileFragment()) }
+                    true
+                }
+                R.id.remarksFragment -> {
+                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, RemarksFragment()) }
+                    true
+                }
+                R.id.chatFragment -> {
+                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, ChatListFragment()) }
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     companion object {

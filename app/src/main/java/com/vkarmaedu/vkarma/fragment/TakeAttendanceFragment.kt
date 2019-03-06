@@ -57,14 +57,14 @@ class TakeAttendanceFragment : Fragment() {
                 Log.d(TAG, "replace fragment")
                 val bundle = Bundle()
                 bundle.putParcelableArrayList("1", viewModel.getListOfAttendance())
-//                findNavController().navigate(R.id.action_teacherFragment_to_attendanceListFragment, bundle)
+//                findNavController().navigate(R.UId.action_teacherFragment_to_attendanceListFragment, bundle)
             }
             return
         }
         var present = 0
         val studentCard = layoutInflater.inflate(R.layout.attendance_card, teacher_card_container, false)
         studentCard.teacher_student_name.text = student.name
-        studentCard.teacher_student_id.text = student.id
+        studentCard.teacher_student_id.text = student.UId
         studentCard.setOnTouchListener { v, event ->
 
             x_cord = event.rawX

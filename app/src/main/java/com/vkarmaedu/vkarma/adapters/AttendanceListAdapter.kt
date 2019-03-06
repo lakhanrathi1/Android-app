@@ -20,7 +20,7 @@ class AttendanceListAdapter(private val list : List<Attendance>) : RecyclerView.
 
     override fun onBindViewHolder(holder: AttendanceViewHolder, position: Int) {
         val attendance = list[position]
-        holder.id.text = attendance.id
+        holder.id.text = attendance.UId
         holder.name.text = attendance.name
         holder.attendance.text = if(attendance.present) "present" else "absent"
     }

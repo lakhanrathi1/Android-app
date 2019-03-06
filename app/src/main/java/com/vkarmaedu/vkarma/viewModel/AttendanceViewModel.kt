@@ -67,8 +67,8 @@ class AttendanceViewModel : ViewModel() {
     }
 
     fun markAttendance(student: Student, attendance: Boolean){
-        val atten = Attendance(student.id, student.name, attendance)
-        attendanceRef.child(student.id).setValue(atten)
+        val atten = Attendance(student.UId, student.name, attendance)
+        attendanceRef.child(student.UId).setValue(atten)
         listAttendance.add(atten)
     }
 }

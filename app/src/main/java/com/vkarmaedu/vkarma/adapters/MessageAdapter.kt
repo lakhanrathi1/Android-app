@@ -21,7 +21,7 @@ class MessageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(messageList[position].userName){
+        return when(messageList[position].senderName){
             UserRepo.name -> VIEW_TYPE_MESSAGE_SENT
             else -> VIEW_TYPE_MESSAGE_RECEIVED
         }
@@ -51,7 +51,7 @@ class MessageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             VIEW_TYPE_MESSAGE_RECEIVED -> {
                 holder as ViewHolderRecieve
-                holder.userName.text = message.userName
+                holder.userName.text = message.senderName
                 holder.text.text = message.text
                 holder.time.text = SimpleDateFormat("hh:mm", Locale.getDefault()).format(message.timeStamp?.time)
             }

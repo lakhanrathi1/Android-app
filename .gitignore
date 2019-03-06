@@ -11,3 +11,6 @@
 /build
 /captures
 .externalNativeBuild
+/functions/functions/service-account.json
+/functions/functions/node_modules
+/app/google-services.json

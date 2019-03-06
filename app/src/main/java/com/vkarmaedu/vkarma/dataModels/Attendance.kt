@@ -5,12 +5,12 @@ import android.os.Parcelable
 import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-data class Attendance(val id : String, val name : String, val present : Boolean) : Parcelable{
+data class Attendance(val UId : String, val name : String, val present : Boolean) : Parcelable{
     constructor(parcel: Parcel) : this(parcel.readString() ?: "", parcel.readString() ?: "", parcel.readByte() != 0.toByte())
     constructor() : this("", "", false)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(id)
+        parcel.writeString(UId)
         parcel.writeString(name)
         parcel.writeByte(if (present) 1 else 0)
     }

@@ -6,22 +6,47 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.snackbar.Snackbar
+import com.vkarmaedu.vkarma.R
+import java.text.SimpleDateFormat
+import java.util.*
 
-fun replaceFragment(fragmentActivity: FragmentActivity, container: Int, fragment: Fragment){
+public fun replaceFragment(fragmentActivity: FragmentActivity, fragment: Fragment){
     fragmentActivity.actionBar?.title = fragmentActivity.title
+
     fragmentActivity.supportFragmentManager
         .beginTransaction()
+        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+        .replace(R.id.main_container, fragment)
+        .commit()
+}
+
+public fun replaceFragment(fragmentActivity: FragmentActivity, container: Int, fragment: Fragment){
+    fragmentActivity.actionBar?.title = fragmentActivity.title
+    val f = fragmentActivity.supportFragmentManager.findFragmentById(container)
+
+    if (f != null && f.javaClass == fragment.javaClass){
+        return
+    }
+
+    fragmentActivity.supportFragmentManager
+        .beginTransaction()
+        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
         .replace(container, fragment)
         .commit()
 }
 
-fun replaceFragmentAddToBackStack(fragmentActivity: FragmentActivity, container: Int, fragment: Fragment){
+public fun replaceFragmentAddToBackStack(fragmentActivity: FragmentActivity, fragment: Fragment){
     fragmentActivity.actionBar?.title = fragmentActivity.title
     fragmentActivity.supportFragmentManager
         .beginTransaction()
-        .replace(container, fragment)
-//        .addToBackStack()
+        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+        .replace(R.id.main_container, fragment)
+        .addToBackStack(null)
         .commit()
+}
+
+public fun popBackStack(fragmentActivity: FragmentActivity){
+    fragmentActivity.supportFragmentManager.popBackStack()
 }
 
 fun showSnack(view : View, message : String){
@@ -35,3 +60,5 @@ fun hideKeyboard(activity: FragmentActivity) {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
+
+val dateFormat = SimpleDateFormat("dd mmm yyyy", Locale.getDefault())

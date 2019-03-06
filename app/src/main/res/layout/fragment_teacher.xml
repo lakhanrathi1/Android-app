@@ -21,10 +21,8 @@
         </android.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
-            android:id="@+id/nav_host_teacher"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            app:navGraph="@navigation/teacher_graph"
+    <FrameLayout
+            android:id="@+id/teacher_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
@@ -35,6 +33,6 @@
             android:layout_height="wrap_content"
             app:menu="@menu/teacher_bottom_menu"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/bottomNavigationView"/>
+            android:id="@+id/teacher_bottom_nav"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

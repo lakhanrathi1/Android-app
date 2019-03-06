@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.vkarmaedu.vkarma.R
+import com.vkarmaedu.vkarma.adapters.StudentProfilePagerAdapter
 import com.vkarmaedu.vkarma.viewModel.StudentProfileViewModel
+import kotlinx.android.synthetic.main.fragment_student_profile.view.*
 
 class StudentProfileFragment : Fragment() {
 
@@ -22,7 +24,12 @@ class StudentProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_student_profile, container, false)
-        activity?.actionBar?.hide()
+        activity?.let {
+            it.actionBar?.hide()
+            root.viewpager.adapter = StudentProfilePagerAdapter(it.supportFragmentManager)
+        }
+
+        root.tabLayout.setupWithViewPager(root.viewpager)
         return root
     }
 }

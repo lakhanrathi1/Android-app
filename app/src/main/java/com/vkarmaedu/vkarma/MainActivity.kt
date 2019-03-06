@@ -2,7 +2,8 @@ package com.vkarmaedu.vkarma
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import com.vkarmaedu.vkarma.fragment.ChooseFragment
+import com.vkarmaedu.vkarma.utility.replaceFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,8 +11,6 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        this.findNavController(R.id.nav_host_main).addOnDestinationChangedListener { _, destination, _ ->
-            title = destination.label
-        }
+        replaceFragment(this, ChooseFragment())
     }
 }

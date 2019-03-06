@@ -1,7 +1,6 @@
 package com.vkarmaedu.vkarma.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.adapters.HomeworkTeacherAdapter
+import com.vkarmaedu.vkarma.utility.replaceFragmentAddToBackStack
 import com.vkarmaedu.vkarma.viewModel.TeacherHomeworkViewModel
 import kotlinx.android.synthetic.main.fragment_teacher_homework.view.*
 
@@ -42,8 +42,8 @@ class TeacherHomeworkFragment : Fragment(), HomeworkTeacherAdapter.OnItemClickLi
         return root
     }
 
-    override fun onItemClickListener(attachment: String) {
-        Log.d(TAG, "attachment clicked")
+    override fun onItemClickListener(position: Int) {
+        activity?.let { replaceFragmentAddToBackStack(it, HomeworkDetailFragment()) }
     }
 
     companion object {

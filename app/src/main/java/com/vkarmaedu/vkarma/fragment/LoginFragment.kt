@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.functions.FirebaseFunctions
@@ -14,6 +13,7 @@ import com.google.firebase.functions.FirebaseFunctionsException
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.utility.TokenBroadcastReceiver
 import com.vkarmaedu.vkarma.utility.hideKeyboard
+import com.vkarmaedu.vkarma.utility.popBackStack
 import com.vkarmaedu.vkarma.utility.showSnack
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
@@ -87,8 +87,10 @@ class LoginFragment : Fragment() {
                                 else Log.d(TAG, "profile update fail")
                             }
                         }
-                        activity?.let { activity -> hideKeyboard(activity) }
-                        findNavController().navigate(R.id.action_loginFragment_to_studentFragment)
+                        activity?.let { activity ->
+                            hideKeyboard(activity)
+                            popBackStack(activity)
+                        }
                     } else {
                         view?.let { it1 -> showSnack(it1, "Sign in failed") }
                     }

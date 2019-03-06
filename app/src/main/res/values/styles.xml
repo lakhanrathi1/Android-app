@@ -22,4 +22,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="round_bg_text">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@drawable/round_bg</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
 </resources>

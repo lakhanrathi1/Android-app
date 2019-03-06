@@ -5,49 +5,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
         <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/AppTheme.AppBarOverlay"
                 android:id="@+id/appBarLayout">
 
-            <android.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-            </android.widget.Toolbar>
+                <ImageView
+                        android:id="@+id/notification"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="32dp"
+                        android:src="@drawable/ic_notification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
         </com.google.android.material.appbar.AppBarLayout>
 
-        <fragment
-                android:id="@+id/nav_host_student"
+        <FrameLayout
+                android:id="@+id/student_container"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                app:navGraph="@navigation/student_graph"
-                app:layout_constraintBottom_toTopOf="@+id/student_bottom_nav"
-                app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
-        </fragment>
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize">
+        </FrameLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/student_bottom_nav"
+                android:layout_gravity="bottom"
                 app:menu="@menu/student_bottom_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:layout_height="wrap_content">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-        <!--app:itemBackground="@color/blue"-->
-        <!--android:foreground="?attr/selectableItemBackground"-->
-        <!--app:itemIconTint="@drawable/bottom_nav_color"-->
-        <!--app:itemTextColor="@drawable/bottom_nav_color"-->
