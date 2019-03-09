@@ -7,39 +7,70 @@
         android:layout_height="match_parent"
         tools:context=".fragment.NotificationFragment">
 
-    <com.google.android.material.tabs.TabLayout
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/tabLayout2">
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.tabs.TabItem
-                android:text="Messages"
+        <androidx.appcompat.widget.Toolbar
+                app:titleTextColor="@color/white"
+                app:title="Notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
+                app:tabIndicatorColor="@color/white"
+                app:tabIndicatorHeight="4dp"
+                app:tabIndicatorFullWidth="false"
+                app:tabBackground="@color/colorPrimary"
+                app:tabTextColor="@drawable/tab_select_color"
+                android:id="@+id/tabLayout2">
 
-        <com.google.android.material.tabs.TabItem
-                android:text="Announcements"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <com.google.android.material.tabs.TabItem
+                    android:text="Messages"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"/>
 
-    </com.google.android.material.tabs.TabLayout>
+            <com.google.android.material.tabs.TabItem
+                    android:text="Announcements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/tabLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             tools:listitem="@layout/list_notifications"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="16dp">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+            android:id="@+id/no_notifications"
+            android:text="No Notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
