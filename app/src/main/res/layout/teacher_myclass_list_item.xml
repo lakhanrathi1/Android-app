@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   android:orientation="vertical"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_margin="10dp"
+                                   android:padding="10dp"
+                                   app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#989a9d"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="3sp"
+                android:text="Class XII-A"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/imageView2"
+                android:id="@+id/class_nameTextView"
+                android:textStyle="bold"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/collapse"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="40dp"
+                android:layout_alignParentTop="true"
+                android:id="@+id/imageView2"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#3d3f43"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="4sp"
+                android:text="Physics"
+                android:layout_alignEnd="@+id/null"
+                android:id="@+id/class_subjectTextview"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/class_nameTextView"
+                android:layout_marginStart="15dp"
+                android:layout_alignStart="@+id/class_nameTextView"
+                android:textStyle="bold"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
