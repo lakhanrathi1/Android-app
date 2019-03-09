@@ -1,14 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".fragment.TeacherAssignment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:layout_marginLeft="33dp"
+            android:layout_marginRight="33dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="50dp">
 
+        <TextView
+                android:text="Add Assignment Question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/add_assignmentQuestionText"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/teacher_select_classRecyclerView"
+                android:layout_marginLeft="30dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        <TextView
+                android:text="Select Class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/selectClass"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="57dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_primary_dark"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/teacher_select_classRecyclerView"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/selectClass"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"/>
+
+        <EditText
+                android:layout_width="293dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/teache_assignment_questionText"
+                android:layout_alignStart="@+id/teacher_select_classRecyclerView"
+                android:layout_marginBottom="99dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/add_assignmentQuestionText"
+                android:background="@color/browser_actions_bg_grey"
+                android:layout_alignEnd="@+id/teacher_select_classRecyclerView"
+                android:hint="Type your assignment question"
+                android:gravity="top"/>
+
+        <Button
+                android:text="Submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/teacher_select_classRecyclerView"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/teacher_assignmet_submitButton"
+                android:layout_marginBottom="44dp"/>
+
+        <ImageView
+                android:src="@drawable/ic_attach_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/teacher_attach_assignmetImageView"
+                android:layout_toStartOf="@+id/teacher_assignmet_submitButton"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignBottom="@+id/teacher_assignmet_submitButton"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+        <Button
+                android:text="Add New Assignment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/teacher_add_new_assignmentButton"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:background="@android:color/background_light"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                android:textAllCaps="false"/>
+
+        <TextView
+                android:text="Previous Assignment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView4"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="97dp"
+                android:background="@android:color/background_light"
+                android:textColor="@android:color/darker_gray"
+                android:padding="3dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="24dp"
+                android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textView4"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:id="@+id/teacher_previous_assignmentRecyclerView"/>
+    </RelativeLayout>
 </FrameLayout>
