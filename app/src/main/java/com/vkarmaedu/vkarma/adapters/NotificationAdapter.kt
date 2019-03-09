@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vkarmaedu.vkarma.R
-import com.vkarmaedu.vkarma.dataModels.Notification
+import com.vkarmaedu.vkarma.data.Notification
 import com.vkarmaedu.vkarma.utility.getTimeDiff
 import kotlinx.android.synthetic.main.list_notifications.view.*
 
-class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.MyViewHolder>() {
+class NotificationAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<NotificationAdapter.MyViewHolder>() {
     private var list : List<Notification> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -25,11 +25,23 @@ class NotificationAdapter : RecyclerView.Adapter<NotificationAdapter.MyViewHolde
         holder.heading.text = notification.heading
         holder.content.text = notification.content
         holder.time.text = getTimeDiff(notification.timeStamp)
+        holder.cross.setOnClickListener{listener.onItemClickListener(notification)}
     }
 
     class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
         val heading = view.heading
         val content = view.content
         val time = view.time
+        val icon = view.icon
+        val cross = view.cross
+    }
+
+    fun changeData(list : List<Notification>){
+        this.list = list
+        notifyDataSetChanged()
+    }
+
+    public interface OnItemClickListener{
+        fun onItemClickListener(notification: Notification)
     }
 }

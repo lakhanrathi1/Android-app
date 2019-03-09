@@ -42,7 +42,7 @@ class TeacherFragment : Fragment() {
                     true
                 }
                 R.id.chat -> {
-                    activity?.let { replaceFragment(it, R.id.teacher_container, ChatListFragment()) }
+                    activity?.let { replaceFragment(it, R.id.teacher_container, ChatChannelFragment()) }
                     true
                 }
                 else -> false

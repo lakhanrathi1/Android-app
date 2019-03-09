@@ -35,6 +35,7 @@ class StudentFragment : Fragment() {
                 currentUser.displayName?.let { it1 -> UserRepo.setCred(it1, currentUser.uid) }
             }
         }
+        activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentProfileFragment()) }
     }
 
     override fun onCreateView(
@@ -55,7 +56,6 @@ class StudentFragment : Fragment() {
         root.notification.setOnClickListener {
             activity?.let { it1 -> replaceFragmentAddToBackStack(it1, NotificationFragment()) }
         }
-        activity?.let { it1 -> replaceFragment(it1, R.id.student_container, StudentHomeworkFragment()) }
         return root
     }
 
@@ -118,7 +118,7 @@ class StudentFragment : Fragment() {
                     true
                 }
                 R.id.chatFragment -> {
-                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, ChatListFragment()) }
+                    activity?.let { it1 -> replaceFragment(it1, R.id.student_container, ChatChannelFragment()) }
                     true
                 }
                 else -> false

@@ -1,6 +1,7 @@
 package com.vkarmaedu.vkarma.fragment
 
 import android.app.Activity.RESULT_OK
+import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -18,13 +19,32 @@ import com.vkarmaedu.vkarma.adapters.MessageAdapter
 import com.vkarmaedu.vkarma.data.Message
 import com.vkarmaedu.vkarma.data.UserRepo
 import com.vkarmaedu.vkarma.viewModel.ChatViewModel
+import com.vkarmaedu.vkarma.viewModel.ChatViewModelFactory
 import kotlinx.android.synthetic.main.fragment_chat.view.*
 import java.util.*
 
 class ChatFragment : Fragment() {
 
-    private val viewModel by lazy { ViewModelProviders.of(this).get(ChatViewModel::class.java) }
+    private val viewModel by lazy {
+        val application: Application? = activity?.application
+        application?.let {
+            ViewModelProviders.of(
+                this,
+                ChatViewModelFactory(application, channel)
+            ).get(ChatViewModel::class.java)
+
+        }
+    }
     private val messageAdapter = MessageAdapter()
+    private lateinit var channel: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            val chan = arguments?.getString(MESSAGE_CHANNEL_kEY)
+            channel = if (chan != null) chan else ""
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -34,12 +54,12 @@ class ChatFragment : Fragment() {
 
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.stackFromEnd = true
-        root.chat_recycler.apply{
+        root.chat_recycler.apply {
             layoutManager = linearLayoutManager
             adapter = messageAdapter
         }
 
-        viewModel.allMessages.observe(this, Observer {
+        viewModel?.allMessages?.observe(this, Observer {
             messageAdapter.changeData(it)
             linearLayoutManager.scrollToPosition(it.lastIndex)
         })
@@ -48,6 +68,7 @@ class ChatFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
 
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -58,7 +79,14 @@ class ChatFragment : Fragment() {
         })
 
         root.chat_send.setOnClickListener {
-            viewModel.insertFirebase(Message(UserRepo.name!!, root.chat_message.text.toString(), Date(System.currentTimeMillis()), null))
+            viewModel?.insertFirebase(
+                Message(
+                    UserRepo.name!!,
+                    root.chat_message.text.toString(),
+                    Date(System.currentTimeMillis()),
+                    null
+                )
+            )
         }
         root.attach.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -71,10 +99,10 @@ class ChatFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null){
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             data.data?.let {
                 Log.d(TAG, it.toString())
-                viewModel.insertStorage(it)
+                viewModel?.insertStorage(it)
             }
         }
     }
@@ -82,5 +110,6 @@ class ChatFragment : Fragment() {
     companion object {
         private const val PICK_IMAGE = 1
         private const val TAG = "ChatFragment"
+        private const val MESSAGE_CHANNEL_kEY = "messageChannelKey"
     }
 }

@@ -21,11 +21,11 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class ChatViewModel(application: Application) : AndroidViewModel(application) {
+class ChatViewModel(application: Application, channel : String) : AndroidViewModel(application) {
     val allMessages : LiveData<List<Message>>
     private val messageRepo : MessageRepository
     private val storageRef = FirebaseStorage.getInstance().getReference("chat_attachments")
-    private val messageRef = FirebaseDatabase.getInstance().getReference("Institute/1/Messages/class1")
+    private val messageRef = FirebaseDatabase.getInstance().getReference("Institute/1/XII-A/messages/$channel")
     private val listener = object : ChildEventListener{
         override fun onCancelled(p0: DatabaseError) {
 

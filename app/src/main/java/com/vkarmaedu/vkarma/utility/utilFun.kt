@@ -10,7 +10,8 @@ import com.vkarmaedu.vkarma.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun replaceFragment(fragmentActivity: FragmentActivity, fragment: Fragment){
+fun replaceFragment(fragmentActivity: FragmentActivity?, fragment: Fragment){
+    if (fragmentActivity == null) return
     fragmentActivity.actionBar?.title = fragmentActivity.title
 
     fragmentActivity.supportFragmentManager
@@ -20,7 +21,8 @@ fun replaceFragment(fragmentActivity: FragmentActivity, fragment: Fragment){
         .commit()
 }
 
-fun replaceFragment(fragmentActivity: FragmentActivity, container: Int, fragment: Fragment){
+fun replaceFragment(fragmentActivity: FragmentActivity?, container: Int, fragment: Fragment){
+    if (fragmentActivity == null) return
     fragmentActivity.actionBar?.title = fragmentActivity.title
     val f = fragmentActivity.supportFragmentManager.findFragmentById(container)
 
@@ -35,7 +37,8 @@ fun replaceFragment(fragmentActivity: FragmentActivity, container: Int, fragment
         .commit()
 }
 
-fun replaceFragmentAddToBackStack(fragmentActivity: FragmentActivity, fragment: Fragment){
+fun replaceFragmentAddToBackStack(fragmentActivity: FragmentActivity?, fragment: Fragment){
+    if (fragmentActivity == null) return
     fragmentActivity.actionBar?.title = fragmentActivity.title
     fragmentActivity.supportFragmentManager
         .beginTransaction()
