@@ -1,7 +1,6 @@
 package com.vkarmaedu.vkarma.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ class ChooseFragment : Fragment() {
 
         root.student_button.setOnClickListener {
             activity?.let { it1 -> replaceFragment(it1, StudentFragment()) }
-            Log.d(TAG, "student button")
         }
         root.teacher_button.setOnClickListener {
             activity?.let { it1 -> replaceFragment(it1, TeacherFragment()) }

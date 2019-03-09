@@ -1,5 +1,7 @@
 package com.vkarmaedu.vkarma.fragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +35,14 @@ class TeacherHomeworkFragment : Fragment(), HomeworkTeacherAdapter.OnItemClickLi
         }
 
         root.new_homework.setOnClickListener{
+            val alertDialog = AlertDialog.Builder(activity).setView(R.layout.new_homework_dialog)
+                .setPositiveButton("Submit", object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
 
+                    }
+                })
+            alertDialog.create()
+            alertDialog.show()
         }
 
         viewmodel.homeworkLiveData.observe(this, Observer {

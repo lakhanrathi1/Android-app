@@ -62,9 +62,9 @@ class ChatFragment : Fragment() {
         }
         root.attach.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
-            intent.type = "*/*"
+            intent.type = "image/jpeg"
             intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-            startActivityForResult(intent, PICK_IMAGE)
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE)
         }
         return root
     }
@@ -76,7 +76,6 @@ class ChatFragment : Fragment() {
                 Log.d(TAG, it.toString())
                 viewModel.insertStorage(it)
             }
-            Log.d(TAG, "onactivityresult")
         }
     }
 

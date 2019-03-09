@@ -11,49 +11,50 @@
             android:id="@+id/chat_recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:padding="8dp"
+            android:paddingBottom="16dp"
+            android:background="@color/grayLight"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/chat_message"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:src="@drawable/ic_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:id="@+id/chat_send"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"/>
 
     <EditText
             android:id="@+id/chat_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:hint="message"
+            android:hint="Type a message"
             android:ems="10"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/chat_send"
+            android:background="@drawable/recieve_message_background"
+            android:padding="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <ImageView
+            android:src="@drawable/ic_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chat_send"
+            app:layout_constraintEnd_toEndOf="@+id/chat_message"
+            app:layout_constraintTop_toTopOf="@+id/chat_message"
+            app:layout_constraintBottom_toBottomOf="@+id/chat_message"
+            android:layout_marginEnd="8dp"/>
 
     <ImageView
             android:src="@drawable/ic_attach_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/attach"
-            app:layout_constraintEnd_toEndOf="@+id/chat_message"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/chat_message"/>
+            app:layout_constraintEnd_toStartOf="@+id/chat_send"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@+id/chat_send"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

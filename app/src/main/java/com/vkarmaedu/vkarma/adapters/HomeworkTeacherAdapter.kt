@@ -9,9 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.dataModels.Homework
+import com.vkarmaedu.vkarma.utility.getTimeDiff
 import kotlinx.android.synthetic.main.list_homework_teacher.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class HomeworkTeacherAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<HomeworkTeacherAdapter.MyViewHolder>() {
 
@@ -44,16 +43,6 @@ class HomeworkTeacherAdapter(private val listener: OnItemClickListener) : Recycl
 
         if (homework.attachment == null) holder.attachment.visibility == GONE
         else holder.attachment.setOnClickListener { listener.onItemClickListener(position) }
-    }
-
-    private fun getTimeDiff(thatTime : Long) : String{
-        val timeDiff = (System.currentTimeMillis() - thatTime) / 60000
-        return when{
-            timeDiff <= 60 -> "$timeDiff min before"
-            timeDiff <= 3600 -> "${timeDiff / 60} hrs before"
-            timeDiff <= 86400 -> "${timeDiff / 1440} days before"
-            else -> SimpleDateFormat("dd/mm/yy", Locale.getDefault()).format(thatTime)
-        }
     }
 
     class MyViewHolder(val item : View) : RecyclerView.ViewHolder(item) {

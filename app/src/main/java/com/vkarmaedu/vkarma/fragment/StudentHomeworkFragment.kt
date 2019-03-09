@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vkarmaedu.vkarma.R
 import com.vkarmaedu.vkarma.adapters.HomeworkStudentAdapter
+import com.vkarmaedu.vkarma.utility.dateFormat
 import com.vkarmaedu.vkarma.utility.replaceFragmentAddToBackStack
 import kotlinx.android.synthetic.main.fragment_student_homework.view.*
 
@@ -23,6 +24,8 @@ class StudentHomeworkFragment : Fragment() , HomeworkStudentAdapter.OnItemClickL
         activity?.actionBar?.show()
         myAdapter = HomeworkStudentAdapter(this)
 
+        root.today.visibility = getHomeworkToday()
+
         root.homework_recycler_view.apply {
             adapter = myAdapter
             layoutManager = LinearLayoutManager(this@StudentHomeworkFragment.context)
@@ -30,6 +33,13 @@ class StudentHomeworkFragment : Fragment() , HomeworkStudentAdapter.OnItemClickL
         }
 
         return root
+    }
+
+    private fun getHomeworkToday(): Int {
+        return if (dateFormat.format(System.currentTimeMillis()) == "")
+            View.VISIBLE
+        else
+            View.GONE
     }
 
     override fun onItemClickListener(position: Int) {

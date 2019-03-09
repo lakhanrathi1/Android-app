@@ -24,6 +24,10 @@ android {
                 arg("room.schemaLocation", "$projectDir/schemas".toString())
             }
         }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
     }
 
     buildTypes {
@@ -35,12 +39,10 @@ android {
 }
 
 ext {
-    navigationVersion = "1.0.0-alpha09"
+    navigationVersion = "1.0.0-rc02"
     archLifecycleVersion = "2.1.0-alpha02"
     roomVersion = "2.1.0-alpha03"
     coroutines = "1.1.0"
-    daggerVersion = "2.16"
-
 }
 
 dependencies {
@@ -56,7 +58,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha04'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
@@ -82,8 +84,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-functions:16.2.0'
 
     // Navigation
-    implementation 'android.arch.navigation:navigation-fragment-ktx:' + navigationVersion
-    implementation 'android.arch.navigation:navigation-ui-ktx:' + navigationVersion
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"

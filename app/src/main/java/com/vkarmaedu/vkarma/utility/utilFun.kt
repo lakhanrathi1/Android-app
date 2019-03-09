@@ -10,7 +10,7 @@ import com.vkarmaedu.vkarma.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-public fun replaceFragment(fragmentActivity: FragmentActivity, fragment: Fragment){
+fun replaceFragment(fragmentActivity: FragmentActivity, fragment: Fragment){
     fragmentActivity.actionBar?.title = fragmentActivity.title
 
     fragmentActivity.supportFragmentManager
@@ -20,7 +20,7 @@ public fun replaceFragment(fragmentActivity: FragmentActivity, fragment: Fragmen
         .commit()
 }
 
-public fun replaceFragment(fragmentActivity: FragmentActivity, container: Int, fragment: Fragment){
+fun replaceFragment(fragmentActivity: FragmentActivity, container: Int, fragment: Fragment){
     fragmentActivity.actionBar?.title = fragmentActivity.title
     val f = fragmentActivity.supportFragmentManager.findFragmentById(container)
 
@@ -35,7 +35,7 @@ public fun replaceFragment(fragmentActivity: FragmentActivity, container: Int, f
         .commit()
 }
 
-public fun replaceFragmentAddToBackStack(fragmentActivity: FragmentActivity, fragment: Fragment){
+fun replaceFragmentAddToBackStack(fragmentActivity: FragmentActivity, fragment: Fragment){
     fragmentActivity.actionBar?.title = fragmentActivity.title
     fragmentActivity.supportFragmentManager
         .beginTransaction()
@@ -45,7 +45,7 @@ public fun replaceFragmentAddToBackStack(fragmentActivity: FragmentActivity, fra
         .commit()
 }
 
-public fun popBackStack(fragmentActivity: FragmentActivity){
+fun popBackStack(fragmentActivity: FragmentActivity){
     fragmentActivity.supportFragmentManager.popBackStack()
 }
 
@@ -61,4 +61,15 @@ fun hideKeyboard(activity: FragmentActivity) {
     }
 }
 
+fun getTimeDiff(thatTime : Long) : String{
+    val timeDiff = (System.currentTimeMillis() - thatTime) / 60000
+    return when{
+        timeDiff <= 60 -> "$timeDiff min before"
+        timeDiff <= 3600 -> "${timeDiff / 60} hrs before"
+        timeDiff <= 86400 -> "${timeDiff / 1440} days before"
+        else -> SimpleDateFormat("dd/mm/yy", Locale.getDefault()).format(thatTime)
+    }
+}
+
 val dateFormat = SimpleDateFormat("dd mmm yyyy", Locale.getDefault())
+val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
